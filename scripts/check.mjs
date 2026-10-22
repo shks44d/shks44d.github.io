@@ -11,7 +11,7 @@ assert(html.includes('https://www.instagram.com/sh.sheikhsaad/'),'Instagram foot
 assert(html.includes('aria-controls="main-nav"'),'Accessible navigation');
 assert(html.includes('download'),'Resume download action');
 const urls=[...new Set([...html.matchAll(/(?:src|href)="(\/[^"#]+)"/g)].map(m=>m[1]).concat([...js.matchAll(/['"](\/assets\/[^'"]+)['"]/g)].map(m=>m[1])))];
-for(const url of urls){await readFile(path.join(root,url));const response=await fetch('http://127.0.0.1:4317'+url,{method:'HEAD'});assert.equal(response.status,200,url);}
+for(const url of urls){await readFile(path.join(root,new URL(url,'http://localhost').pathname));const response=await fetch('http://127.0.0.1:4317'+url,{method:'HEAD'});assert.equal(response.status,200,url);}
 for(const id of ['about','projects','experience','contact','toolkit'])assert(html.includes(`id="${id}"`),`Section ${id}`);
 const pdf=await readFile(path.join(root,'assets/Muhammad_Saad_Ahmed_Resume.pdf'));assert(pdf.subarray(0,4).toString()==='%PDF','Real PDF');
 for(const file of (await readdir(path.join(root,'assets/projects'))).filter(f=>f.endsWith('.mp4'))){const response=await fetch('http://127.0.0.1:4317/assets/projects/'+file,{headers:{Range:'bytes=0-127'}});assert.equal(response.status,206,'Video range request');assert.equal((await response.arrayBuffer()).byteLength,128);}
