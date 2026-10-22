@@ -1,4 +1,4 @@
-# Muhammad Saad Ahmed — Meridian portfolio
+# Muhammad Saad Ahmed
 
 A responsive static portfolio based on the selected midnight navy and glacier blue Meridian design. No runtime packages, build step, analytics, or third-party font requests are required.
 
