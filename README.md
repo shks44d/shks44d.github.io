@@ -22,6 +22,8 @@ Open **http://localhost:4317**. `npm run check` verifies local assets, privacy r
 
 The website is configured for GitHub Pages at https://shks44d.github.io/. Pushing to `main` runs `.github/workflows/deploy-pages.yml`, which publishes only the contents of `public/`. The local server, preparation scripts, and preview captures are not included in the deployed website.
 
+The same website is also deployed at https://s44d.vercel.app/ in the Vercel project `saad-6430/s44d`. `vercel.json` serves `public/` as a static site without a build or installation step. To update this deployment, run `vercel deploy --prod --scope saad-6430` from the linked local checkout. Git-based Vercel updates require connecting the GitHub account in Vercel; that connection is not currently enabled. GitHub Pages remains independent and continues to update from `main`.
+
 ## Content and assets
 
 Professional content follows the supplied résumé. CEH is explicitly in progress; Junior Penetration Tester is a completed TryHackMe learning path. Public contact includes email, LinkedIn and GitHub; Instagram appears only in the footer. The page contains no phone number; the original downloadable résumé includes it, with permission.
