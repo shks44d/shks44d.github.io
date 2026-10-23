@@ -34,7 +34,6 @@ document.querySelectorAll('[data-project]').forEach(button=>button.addEventListe
 dialog.addEventListener('close',()=>{dialog.querySelectorAll('video').forEach(v=>v.pause());});
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 
-document.getElementById('copy-email').addEventListener('click',async()=>{const status=document.getElementById('copy-status');try{await navigator.clipboard.writeText('shksaad2003@gmail.com');status.textContent='Email address copied.';}catch{status.textContent='Use the email link above: shksaad2003@gmail.com';}});
 const sectionLinks=[...nav.querySelectorAll('a[href^="#"]')];
 const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){sectionLinks.forEach(a=>{const active=a.hash===`#${entry.target.id}`;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}}},{rootMargin:'-15% 0px -55% 0px',threshold:0});
 document.querySelectorAll('section[id]').forEach(section=>observer.observe(section));
