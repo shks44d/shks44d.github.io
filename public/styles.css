@@ -16,3 +16,12 @@
 @media(max-width:360px){.hero-actions .button{font-size:12px;padding-inline:11px}.hero-bottom{font-size:9px}.hero-bottom>a{font-size:9px}.contact-panel{padding-inline:18px}.contact-panel h2{font-size:29px}.credential{flex-wrap:wrap}.credential-status{margin-left:30px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.project-image:hover img{transform:none}}
 @media(max-width:800px){.hero-bottom{flex-wrap:wrap;padding-block:12px;row-gap:10px}.hero-bottom>div{display:flex;order:3;width:100%;justify-content:center;border-top:1px solid #22354480;padding-top:9px}.hero-bottom #guardian-hint{font-size:10px}}
+
+/* Mobile reading order: headline, introduction, guardian, then actions. */
+@media(max-width:600px){
+  .hero-scene{height:auto;justify-content:flex-start}
+  .hero-intro{position:relative;bottom:auto;order:0;max-width:33ch;margin:18px auto 4px}
+  .hero-intro p{font-size:15px;line-height:1.6;text-wrap:balance;color:var(--muted)}
+  .guardian-stage{position:relative;top:auto;left:auto;transform:none;order:1;flex-shrink:0;height:320px;margin-top:4px}
+  .hero-actions{position:relative;inset:auto;order:2;flex-shrink:0;margin:0 0 24px}
+}
