@@ -21,7 +21,7 @@ Open **http://localhost:4317**. `npm run check` verifies local assets, privacy r
 - `public/assets/`: self-hosted Sora and Source Sans 3 fonts, original résumé PDF, optimized screenshots and supplied showcase videos.
 - `server.mjs`: loopback-only development server with video range support.
 
-The website is configured for GitHub Pages at https://shks44d.github.io/. Pushing to `main` runs `.github/workflows/deploy-pages.yml`, which publishes only the contents of `public/`. The local server, preparation scripts, and preview captures are not included in the deployed website.
+The website is configured for GitHub Pages at https://shks44d.github.io/. Pushing to `main` runs `.github/workflows/deploy-pages.yml`, which publishes only the contents of `public/`. The local server and development checks are not included in the deployed website.
 
 The same website is also deployed at https://s44d.vercel.app/ in the Vercel project `saad-6430/s44d`. `vercel.json` serves `public/` as a static site without a build or installation step. To update this deployment, run `vercel deploy --prod --scope saad-6430` from the linked local checkout. Git-based Vercel updates require connecting the GitHub account in Vercel; that connection is not currently enabled. GitHub Pages remains independent and continues to update from `main`.
 
@@ -35,4 +35,4 @@ Videos are loaded on demand inside native accessible dialogs and never autoplay.
 
 ## Interactive guardian
 
-The guardian uses separate neck and head geometry. Head movement follows a mouse or pen within the hero and returns to center on exit. Animation pauses when offscreen or in a background tab. Reduced-motion preferences disable animation by default; visitors can also pause it manually. Touch devices show a subtle idle pose without intercepting scrolling. A local SVG illustration remains available if WebGL cannot initialize. Sora and Source Sans 3 use the SIL Open Font License; license files accompany the fonts.
+The guardian uses separate neck and head geometry. Head movement follows a mouse or pen within the hero and returns to center on exit. Animation pauses when offscreen or in a background tab. Reduced-motion preferences disable animation by default; visitors can also pause it manually. On touch devices, passive touch tracking turns the head without blocking native scrolling or pinch zoom. Only the main 3D guardian is displayed; the light field stays empty while it loads or if WebGL is unavailable. Sora and Source Sans 3 use the SIL Open Font License; license files accompany the fonts.

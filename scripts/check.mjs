@@ -20,6 +20,6 @@ for(const id of ['about','projects','experience','contact','toolkit'])assert(htm
 const pdf=await readFile(path.join(root,'assets/Muhammad_Saad_Ahmed_Resume.pdf'));assert(pdf.subarray(0,4).toString()==='%PDF','Real PDF');
 for(const file of (await readdir(path.join(root,'assets/projects'))).filter(f=>f.endsWith('.mp4'))){const response=await fetch('http://127.0.0.1:4317/assets/projects/'+file,{headers:{Range:'bytes=0-127'}});assert.equal(response.status,206,'Video range request');assert.equal((await response.arrayBuffer()).byteLength,128);}
 assert.equal((await fetch('http://127.0.0.1:4317/not-a-page')).status,404,'Missing page is 404');
-assert(html.includes('id="motion-toggle"')&&html.includes('guardian-fallback.svg'),'Motion control and static fallback');
+assert(html.includes('id="motion-toggle"'),'Motion control');
 assert(guardian.includes('prefers-reduced-motion')&&guardian.includes('visibilitychange'),'Motion preferences and background suspension');
 console.log(`Passed: ${urls.length} asset links, PDF, phone privacy, page structure, social links, and video range playback support.`);

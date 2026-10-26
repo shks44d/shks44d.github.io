@@ -114,7 +114,7 @@ try {
   const home = document.getElementById('home');
   function render(){renderer.render(scene,camera);}
   function resize(){const {width,height}=stage.getBoundingClientRect(); renderer.setSize(width,height,false); camera.aspect=width/height; camera.updateProjectionMatrix(); render();}
-  function updateControl(){control.setAttribute('aria-pressed',String(enabled));control.textContent=enabled?'Pause motion':'Enable motion';hint.textContent=enabled?(finePointer.matches?'Move your cursor. I’m following.':'A curious mind. A defensive purpose.'):'A curious mind. A defensive purpose.';}
+  function updateControl(){control.setAttribute('aria-pressed',String(enabled));control.textContent=enabled?'Pause motion':'Enable motion';hint.textContent=enabled?(finePointer.matches?'Move your cursor. I’m following.':'Touch and move. I’m following.'):'A curious mind. A defensive purpose.';}
   function tick(time) {
     frame=0;
     if(!enabled||!visible||document.hidden)return;
@@ -128,12 +128,24 @@ try {
   function start(){if(!frame&&enabled&&visible&&!document.hidden){last=performance.now();frame=requestAnimationFrame(tick);}}
   function stop(){cancelAnimationFrame(frame);frame=0;}
   function reset(){targetX=0;targetY=-.08;}
-  home.addEventListener('pointermove',event=>{
-    if(event.pointerType==='touch'||!enabled)return;
+  function follow(clientX,clientY){
+    if(!enabled)return;
     const bounds=home.getBoundingClientRect();
-    targetX=THREE.MathUtils.clamp((event.clientX-(bounds.left+bounds.width/2))/(bounds.width/2),-1,1)*.48;
-    targetY=THREE.MathUtils.clamp((event.clientY-(bounds.top+bounds.height*.54))/(bounds.height/2),-1,1)*.22;
+    targetX=THREE.MathUtils.clamp((clientX-(bounds.left+bounds.width/2))/(bounds.width/2),-1,1)*.48;
+    targetY=THREE.MathUtils.clamp((clientY-(bounds.top+bounds.height*.54))/(bounds.height/2),-1,1)*.22;
+  }
+  home.addEventListener('pointermove',event=>{
+    if(event.pointerType!=='touch')follow(event.clientX,event.clientY);
   },{passive:true});
+  // Passive touch events keep native scrolling and pinch zoom available on phones.
+  function followTouch(event){
+    if(event.touches.length!==1){reset();return;}
+    const touch=event.touches[0];follow(touch.clientX,touch.clientY);
+  }
+  home.addEventListener('touchstart',followTouch,{passive:true});
+  home.addEventListener('touchmove',followTouch,{passive:true});
+  home.addEventListener('touchend',reset,{passive:true});
+  home.addEventListener('touchcancel',reset,{passive:true});
   home.addEventListener('pointerleave',reset);
   control.addEventListener('click',()=>{enabled=!enabled;updateControl();if(enabled)start();else stop();});
   reduceMotion.addEventListener('change',()=>{enabled=!reduceMotion.matches;reset();updateControl();if(enabled)start();else{stop();head.rotation.set(0,0,0);render();}});
@@ -145,8 +157,8 @@ try {
   canvas.addEventListener('webglcontextrestored',()=>{resize();stage.classList.add('is-ready');control.hidden=false;start();});
   resize();updateControl();stage.classList.add('is-ready');control.hidden=false;start();
 } catch (error) {
-  // The illustrated fallback and all portfolio content remain usable without WebGL.
+  // Leave the light field empty if 3D is unavailable, without swapping in a different robot.
   stage.classList.remove('is-ready');
   hint.textContent='A curious mind. A defensive purpose.';
-  console.warn('3D guardian unavailable; using static artwork.',error);
+  console.warn('3D guardian unavailable.',error);
 }
