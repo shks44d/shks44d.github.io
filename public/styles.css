@@ -36,3 +36,6 @@
   .header-inner{gap:12px}
   .scroll-arrow{width:16px;height:16px}
 }
+
+a.certificate-link:hover{color:var(--text);border-color:var(--blue);background:#183149}
+@media(max-width:600px){.credential:has(.certificate-link){flex-wrap:wrap}.certificate-link{margin-left:30px}}
