@@ -27,8 +27,8 @@
 }
 
 .mobile-github{display:none}
-.hero-bottom>a{line-height:1;white-space:nowrap}
-.scroll-arrow{display:block;width:18px;height:18px;flex-shrink:0;color:var(--blue);transform:translateY(-2px)}
+.hero-bottom>a{align-items:center;line-height:1;white-space:nowrap}
+.scroll-arrow{display:block;width:18px;height:18px;flex-shrink:0;color:var(--blue);transform:translateY(-1px)}
 @media(max-width:600px){
   .mobile-github{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--border);border-radius:3px;background:#102131;color:var(--muted);margin-left:auto}
   .mobile-github:hover{color:var(--blue);border-color:var(--blue)}
