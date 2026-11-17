@@ -1,0 +1,9 @@
+.case-study { max-width: 860px; padding-block: clamp(3rem, 8vw, 6rem); }
+.case-study h1 { font-size: clamp(2.5rem, 8vw, 4.25rem); line-height: 1.12; margin-block: .45em; overflow-wrap: anywhere; }
+.case-intro { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+.case-study p, .case-image figcaption { color: var(--muted); }
+.case-study a, nav[aria-label="Project case studies"] a { color: #86caff; text-decoration: underline; text-underline-offset: .2em; }
+.case-study section, .case-study nav { margin-block-start: 2.25rem; }
+.case-image { margin: 2rem 0; }
+.case-image img { display: block; width: 100%; height: auto; border-radius: .5rem; }
+.case-image figcaption { margin-block-start: .5rem; }
